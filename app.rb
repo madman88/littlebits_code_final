@@ -8,7 +8,6 @@ require_relative './helpers/route_helpers'
 require 'sinatra/flash'
 require 'sinatra/redirect_with_flash'
 
-
   enable :sessions
 
   helpers do
@@ -47,27 +46,13 @@ require 'sinatra/redirect_with_flash'
     erb :"posts/view"
   end
 
-  # edit post
-  get "/posts/:id/edit" do
-    @post = Post.find(params[:id])
-    @title = "Edit Form"
-    erb :"posts/edit"
-  end
-
-  put "/posts/:id" do
-    @post = Post.find(params[:id])
-    @post.update(params[:post])
-    redirect "/posts/#{@post.id}"
-  end
-
   private
 
   def save_image
     image = params['post'][:image]
-    if (image && image[:filename])
-      filename = image[:filename]
+    if @filename
       file = image[:tempfile]
-      path = "./user_images/#{filename}"
+      path = "./public/user_images/#{filename}"
       # Write file to disk
       File.open(path, 'wb') do |f|
         f.write(file.read)
@@ -75,13 +60,22 @@ require 'sinatra/redirect_with_flash'
     end
   end
 
+  def filename
+    @filename ||= params['post'][:image][:filename] if (params['post'][:image])
+  end
+
+  def bits
+    params['post']['bits'].join(', ') if params['post']['bits']
+  end
+
   def get_params
-#    require 'pry';binding.pry
     {
       "title" => params['post']['title'],
       "description" => params['post']['description'],
       "user_name" => params['post']['user_name'],
       "email" => params['post']['email'],
-      "bits" => params['post']['bits'],
+      "bits" => bits,
+      "image" => filename,
+      "materials" => params['post']['materials'].split(',').join(', ')
     }
   end

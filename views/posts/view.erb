@@ -1,9 +1,12 @@
-<h1><%=h @post.title %></h1>
+<h1><%=h @post.title.capitalize %></h1>
 <p><%=h @post.description %></p>
 <p>Bits used: <%=h @post.bits %></p>
+<% if @post.materials %>
+  <p>Other Materials: <%=h @post.materials %></p>
+<% end %>
 <p>By: <%=h @post.user_name %></p>
 <div>
-  <img src="../user_images/<%= @post.image %>" alt="image" width="300" height="300">
+  <% if @post.image %>
+    <img src="../user_images/<%= @post.image %>" alt="image" width="300" height="300">
+  <% end %>
 </div>
-<br>
-<a href="/posts/<%= @post.id %>/edit">Edit</a>

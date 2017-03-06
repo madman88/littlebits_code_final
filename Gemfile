@@ -11,7 +11,4 @@ gem 'sinatra-redirect-with-flash'
 gem 'rake'
 gem 'pg'
 gem 'sprockets'
-
-group :development do
-  gem 'pry'
-end
+gem 'pry'
