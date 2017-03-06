@@ -1,0 +1,9 @@
+<h1><%=h @post.title %></h1>
+<p><%=h @post.description %></p>
+<p>Bits used: <%=h @post.bits %></p>
+<p>By: <%=h @post.user_name %></p>
+<div>
+  <img src="../user_images/<%= @post.image %>" alt="image" width="300" height="300">
+</div>
+<br>
+<a href="/posts/<%= @post.id %>/edit">Edit</a>

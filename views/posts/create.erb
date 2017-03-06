@@ -1,0 +1,48 @@
+<h2>Submit Invention</h2>
+<br/>
+<form action="/posts" method="post"role="form" enctype="multipart/form-data">
+ <div class="form-group">
+   <label for="post_title">Title:</label>
+   <br>
+   <input id="post_title" class="form-control" name="post[title]" type="text" value="<%= @post.title %>" style="width=90%"/>
+ </div>
+ <div class="form-group">
+   <div>
+     <label for="post_description">Description:</label>
+   </div>
+   <input id="post_description" name="post[description]" type="text" class="form-control" value="<%= @post.description %>"></input>
+ </div>
+ <div class="form-group">
+   <label for="post_user">User Name:</label>
+   <br>
+   <input id="post_user" class="form-control" name="post[user_name]" type="text" value="<%= @post.user_name %>" style="width=90%"/>
+ </div>
+ <div class="form-group">
+   <label for="post_email">Email Id:</label>
+   <br>
+   <input id="post_email" class="form-control" name="post[email]" type="text" value="<%= @post.email %>" style="width=90%"/>
+ </div>
+ <div class="form-group">
+   <!-- Note the missing multiple attribute! -->
+   <label for="bits_used">Bits used:</label>
+   <br>
+   <select id="post_bits" multiple="multiple" name="post[bits][]" value="<%= @post.bits %>>
+     <% bits_used.each_with_index do |bit,i| %>
+       <option value="<%= bit %>" ><%=bit%></option>
+    <% end %>
+   </select>
+</div>
+<div class="form-group">
+   <label for="bits_used">Other materials used:</label>
+   <br>
+   <input id="post_materials" data-role="tagsinput"  autocomplete="off" class="form-control" name="post[materials]" type="text" data-provide="typeahead">
+</div>
+ <div class="form-group">
+    <label for="post_image">Upload image:</label>
+    <br>
+   <input id="post_image" class="form-control" type="file" name="post[image]" accept="image/*">
+ </div>
+</select>
+ <button type="submit" class="btn btn-success">Submit</button>
+ <br>
+</form>
